@@ -1,5 +1,6 @@
 <!-- php : server side (mengelola)-->
 <!-- cara menulis syntax php -->
+
 <?php
 //echo "Hello World";
 //membuat variabel
