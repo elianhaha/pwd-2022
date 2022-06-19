@@ -1,11 +1,11 @@
-<?php 
+<?php
 //koneksi DB
-$koneksi=mysqli_connect('localhost','root','','pwd_2022');
-echo "koneksi sukses"
+$koneksi = mysqli_connect('localhost', 'root', '', 'pwd_2022');
+echo "koneksi sukses";
 
 //menampilkan data dari db ke tabel
 //1. query isi tabel
-$result = mysqli_query($koneksi,'SELECT*FROM mahasiswa');
+$result = mysqli_query($koneksi, 'SELECT*FROM mahasiswa');
 
 //2. ubah data ke dalam array
 //* array numerik
@@ -15,7 +15,7 @@ var_dump($data);
 
 //3.looping data
 $baris = [];
-while ($data = mysqli_fetch_assoc($result)){
+while ($data = mysqli_fetch_assoc($result)) {
    $baris[] = $data;
 }
 
@@ -49,19 +49,20 @@ $mahasiswa = $baris;
 
       <!-- baris data -->
       <!-- looping -->
-      <?php $=1;
-       foreach ($mahasiswa as $mhs);?>
+      <?php
+      $i = 1;
+      foreach ($mahasiswa as $mhs); ?>
       <tr>
          <td><?= $i++; ?></td>
-         <td><?= $mhs[nim]; ?></td>
-         <td><?= $mhs[nama]; ?></td>
-         <td><?= $mhs[prodi]; ?></td>
+         <td><?= $mhs['nim']; ?></td>
+         <td><?= $mhs['nama']; ?></td>
+         <td><?= $mhs['prodi']; ?></td>
          <td>foto</td>
          <td>
             <a href="">Ubah</a> | <a href="">Hapus</a>
          </td>
       </tr>
-      <?php endforeach; ?>
+      <php endforeach; ?>
    </table>
 </body>
 

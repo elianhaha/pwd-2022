@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2022 at 01:35 PM
+-- Generation Time: Jun 17, 2022 at 02:16 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -34,6 +34,14 @@ CREATE TABLE `mahasiswa` (
   `prodi` varchar(100) NOT NULL,
   `foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `prodi`, `foto`) VALUES
+(1, '20410100000', 'Bayu', 'Sistem Pertukangan', 'foto'),
+(2, '20410100000', 'Budi', 'Teknik Perkulian', 'foto');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
