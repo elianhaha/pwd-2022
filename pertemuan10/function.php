@@ -48,3 +48,13 @@ function deleteData($id)
 
    return mysqli_affected_rows($con);
 }
+function updateData($id)
+{
+   $con = koneksi();
+   $query = mysqli_query($con, "SELECT * FROM mahasiswa where id = '" . $_GET['id'] . "';");
+
+
+   mysqli_query($con, $query);
+
+   return mysqli_affected_rows($con);
+}
