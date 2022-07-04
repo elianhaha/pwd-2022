@@ -12,7 +12,7 @@ $kereta = mysqli_query($connect, "SELECT * FROM kereta");
 if (isset($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 
