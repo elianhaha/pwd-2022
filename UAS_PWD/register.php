@@ -78,7 +78,7 @@ if (isset($_POST['register'])) {
                     admin
                 </label>
             </div>
-            <button type="submit" name="register" class="btn btn-primary mt-2">Submit</button>
+            <button type="submit" name="register" class="btn btn-primary mt-2">Daftar</button>
         </form>
         <a href="login.php">Login</a>
     </div>
