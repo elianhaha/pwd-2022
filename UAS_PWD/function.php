@@ -12,7 +12,7 @@ function register($data)
 
     //confirmed checking
 
-    $check_username = mysqli_query($conn, "SELECT username FROM register WHERE username = '$username'");
+    $check_username = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
     if (mysqli_fetch_assoc($check_username)) {
         echo "<script>alert('username ada')</script>";
         return false;
@@ -31,10 +31,10 @@ function register($data)
     //insert new user to database
 
     if (isset($_POST["admin"])) {
-        mysqli_query($conn, "INSERT INTO register VALUES('','$username','$email','$password','admin')");
+        mysqli_query($conn, "INSERT INTO users VALUES('','$username','$email','$password','admin')");
         return false;
     } else {
-        mysqli_query($conn, "INSERT INTO register VALUES('','$username','$email','$password','user')");
+        mysqli_query($conn, "INSERT INTO users VALUES('','$username','$email','$password','user')");
         return false;
     }
     header("Location:login.php");
