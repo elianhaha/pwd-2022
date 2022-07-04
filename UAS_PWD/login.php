@@ -15,7 +15,7 @@ $err = "";
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $result = mysqli_query($conn, "SELECT * FROM register WHERE email = '$email'");
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
 
