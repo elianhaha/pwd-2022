@@ -6,7 +6,7 @@ if (!isset($_SESSION["login"])) {
 }
 require "../function.php";
 $username = $_SESSION['username'];
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
