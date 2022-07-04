@@ -14,9 +14,6 @@
                     <a class="nav-link active" aria-current="page" href="admin.php">Kereta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="daftar-user.php">User</a>
                 </li>
 
