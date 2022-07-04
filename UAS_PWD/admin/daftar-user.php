@@ -5,7 +5,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 require "user.php";
-$user = mysqli_query($connect, "SELECT * FROM register");
+$user = mysqli_query($connect, "SELECT * FROM users");
 
 ?>
 <!DOCTYPE html>
