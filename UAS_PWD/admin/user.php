@@ -7,4 +7,3 @@ function delete($id)
     mysqli_query($connect, "DELETE FROM register WHERE id = '$id'");
     return mysqli_affected_rows($connect);
 }
-?>
