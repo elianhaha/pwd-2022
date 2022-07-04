@@ -28,3 +28,4 @@ function search($keyword)
     $query = "SELECT * FROM kereta WHERE nama_kereta = '$keyword'";
     return query($query);
 }
+?>
