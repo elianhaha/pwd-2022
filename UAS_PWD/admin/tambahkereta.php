@@ -31,7 +31,10 @@ if (isset($_POST["kereta"])) {
             <div class="mb-3 col-md-5">
                 <label for="exampleInputEmail1" class="form-label">Kereta</label>
                 <input type="text" class="form-control" name="nama_kereta">
-
+            </div>
+            <div class="mb-3 col-md-5">
+                <label for="exampleInputEmail1" class="form-label">Kelas</label>
+                <input type="text" class="form-control" name="kelas">
             </div>
             <div class="mb-3 col-md-5">
                 <label for="exampleInputEmail1" class="form-label">Berangkat</label>

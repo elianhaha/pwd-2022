@@ -1,5 +1,7 @@
 <?php
 session_start();
+require 'function.php';
+
 if (isset($_SESSION["login"])) {
     if ($_SESSION["usertype"] == "admin") {
         header("Location:./admin/admin.php");
@@ -10,7 +12,6 @@ if (isset($_SESSION["login"])) {
     }
 }
 
-require 'function.php';
 $err = "";
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -23,63 +24,74 @@ if (isset($_POST['login'])) {
 
             if ($row['usertype'] == "admin") {
                 $_SESSION["login"] = true;
+
                 $username = $row['username'];
+                $address = $row['address'];
+                $nik = $row['nik'];
+                $email = $row['email'];
                 $_SESSION['username'] = $username;
+                $_SESSION['address'] = $address;
+                $_SESSION['nik'] = $nik;
+                $_SESSION['email'] = $email;
                 header("Location:./admin/admin.php");
                 exit;
             } else {
                 $_SESSION["login"] = true;
+
                 $username = $row['username'];
+                $address = $row['address'];
+                $nik = $row['nik'];
+                $email = $row['email'];
                 $_SESSION['username'] = $username;
+                $_SESSION['address'] = $address;
+                $_SESSION['nik'] = $nik;
+                $_SESSION['email'] = $email;
                 header("Location:./user/index.php");
                 exit;
             }
         } else {
-            $err = "Wrong email and password";
+            $err = "email dan password salah";
         }
     } else {
-        $err = "Wrong email and password";
+        $err = "email dan password salah";
     }
 }
 ?>
 
 <!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!----<title>Login Form Design | CodeLab</title>---->
     <style>
-        p {
-            color: red;
-        }
+        <?php include("login.css") ?>
     </style>
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-
-    <div class="container mt-5">
-        <h1>Login</h1>
-        <form class="mt-3" method="POST" action="">
-            <p><?php echo $err ?></p>
-            <div class="mb-3 col-md-5">
-                <label class="form-label">Email address</label>
-                <input type="text" class="form-control" name="email">
-
+    <div class="wrapper">
+        <div class="title">Login Form</div>
+        <form action="" method="POST">
+            <p><?php echo $err; ?></p>
+            <div class="field">
+                <input type="text" name="email" required autocomplete="off">
+                <label>Email Address</label>
             </div>
-            <div class="mb-3 col-md-5">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
+            <div class="field">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div><br>
+            <div class="field">
+                <input type="submit" name="login" value="Login">
             </div>
-
-            <button type="submit" name="login" class="btn btn-primary">Submit</button>
+            <div class="signup-link">Not a member? <a href="register.php">Signup now</a></div>
+            <div class="back">
+                <a href="index.php"> &laquo;Back</a>
+            </div>
         </form>
-        <a href="register.php">Register</a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

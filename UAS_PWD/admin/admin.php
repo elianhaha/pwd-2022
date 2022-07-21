@@ -4,14 +4,12 @@ if (!isset($_SESSION["login"])) {
     header("Location:../login.php");
     exit;
 }
-require "../function.php";
+
 require "kereta.php";
 $username = $_SESSION['username'];
-$kereta = mysqli_query($connect, "SELECT * FROM kereta");
+$kereta = query("SELECT * FROM kereta");
 
-if (isset($_GET['keyword'])) {
-    $keyword = $_GET['keyword'];
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,50 +19,56 @@ if (isset($_GET['keyword'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | <?php echo ucfirst($username) ?></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
     <?php include('navbar.php') ?>
+    <h1>Admin <?php echo ucfirst($username) ?></h1>
 
-    <div class="container">
-        <h1>Admin <?php echo ucfirst($username) ?></h1>
-        <a href="tambahkereta.php" class="btn btn-primary">Tambah Kereta</a>
-        <form action="" method="GET">
-            <input type="text" name="keyword" placeholder="Search....">
-            <input type="submit" value="cari">
-        </form>
+    <a href="tambahkereta.php" class="btn btn-primary">Tambah Kereta</a>
+
+    <form action="" method="POST">
+        <input type="text" name="keyword" placeholder="Search...." id="keyword" autocomplete="off">
+
+    </form>
+
+    <div id="container" class="container">
         <table class="table table-hover table-striped table-bordered mt-3">
-
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama Kereta</th>
+                <th scope="col">Kelas</th>
                 <th scope="col">Berangkat</th>
                 <th scope="col">Tujuan</th>
                 <th scope="col">Harga</th>
+                <th scope="col">Aksi</th>
             </tr>
             <?php
-            if (isset($_GET['keyword'])) {
-                $keyword = $_GET['keyword'];
-                $kereta = mysqli_query($connect, "SELECT * FROM kereta WHERE nama_kereta like '%" . $keyword . "%'");
-            } else {
-                $kereta = mysqli_query($connect, "SELECT * FROM kereta");
-            }
             $i = 1;
-            while ($row = mysqli_fetch_array($kereta)) : ?>
+            foreach ($kereta as $kt) : ?>
                 <tr>
                     <td scope="row"><?= $i++; ?></td>
-                    <td><?= $row['nama_kereta']; ?></td>
-                    <td><?= $row['berangkat']; ?><br>
-                        <?= $row['jam_berangkat']; ?></td>
-                    <td><?= $row['tujuan']; ?><br>
-                        <?= $row['jam_tujuan']; ?></td>
-                    <td>Rp <?= $row['harga']; ?></td>
+                    <td><?= ucfirst($kt['nama_kereta']); ?></td>
+                    <td><?= ucfirst($kt['kelas']); ?></td>
+                    <td><?= $kt['berangkat']; ?><br>
+                        <?= $kt['jam_berangkat']; ?></td>
+                    <td><?= $kt['tujuan']; ?><br>
+                        <?= $kt['jam_tujuan']; ?></td>
+                    <td>Rp <?= $kt['harga']; ?></td>
+                    <td>
 
+                        <a class="btn badge bg-danger" href="delete-kereta.php?id=<?= $kt['id'] ?>" onclick="return confirm('Anda yakin mau menghapus')">Delete</a>
+                        <a class="btn badge bg-success" href="edit-kereta.php?id=<?= $kt['id'] ?>">Edit</a>
+
+                    </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </table>
     </div>
 
+
+    <script src="script.js"></script>
 </body>
 
 </html>

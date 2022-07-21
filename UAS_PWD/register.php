@@ -1,34 +1,16 @@
 <?php
 require "function.php";
 
-$nameErr = $emailErr = $passErr = $passErr2 = "";
 
 if (isset($_POST['register'])) {
-    if (register($_POST) > 0) {
 
+    if (register($_POST) > 0) {
         header("Location:login.php");
     } else {
         echo mysqli_error($conn);
     }
-    //jika username kurang atau kosong
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["username"])) {
-            $nameErr = "Nama harus diisi";
-        }
-        if (strlen($_POST["username"]) < 5) {
-            $nameErr = "Nama harus lebih dari 5";
-        }
-        if (empty($_POST["email"])) {
-            $emailErr = "Email harus diisi";
-        }
-        if (empty($_POST["password"])) {
-            $passErr = "Password harus diisi";
-            if (empty($_POST["password2"])) {
-                $passErr2 = "Tidak cocok";
-            }
-        }
-    }
 }
+
 
 ?>
 
@@ -40,48 +22,64 @@ if (isset($_POST['register'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="register.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
     <style>
-        span {
-            color: red;
-        }
+        <?php include "register.css"; ?>
     </style>
 </head>
 
 <body>
     <div class="container mt-1">
-        <h1>Registration</h1>
+        <h1 class="title text-center">Registration</h1>
         <form class="mt-3" method="POST" action="">
-            <div class="mb-3 col-md-5">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username">
-                <span class="error"><?php echo $nameErr ?></span>
+            <div class="details">
+
+                <div class="input-box">
+                    <label for=" username">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter your username" autocomplete="off" required>
+
+                </div>
+                <div class="input-box">
+                    <label for=" username">NIK</label>
+                    <input type="text" class="form-control" name="nik" placeholder="Enter your NIK" autocomplete="off" required>
+                </div>
+                <div class="input-box">
+                    <label for=" username">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Enter your address" autocomplete="off" required>
+                </div>
+                <div class="input-box">
+                    <label>Email address</label>
+                    <input type="text" class="form-control" name="email" placeholder="Enter your email" autocomplete="off" required>
+
+                </div>
+                <div class="input-box">
+                    <label for=" password">Password</label>
+                    <input type="password" class="form-control" placeholder="Enter your password" name="password" required>
+
+                </div>
+                <div class="input-box">
+                    <label for=" password2">Confirm Password</label>
+                    <input type="password" class="form-control" placeholder="Confirm your password" name="password2" required>
+
+                </div>
             </div>
-            <div class="mb-3 col-md-5">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="text" class="form-control" name="email">
-                <span class="error"><?php echo $emailErr ?></span>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="admin">
+                <label class="form-check-label">admin</label>
             </div>
-            <div class="mb-3 col-md-5">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
-                <span class="error"><?php echo $passErr ?></span>
-            </div>
-            <div class="mb-3 col-md-5">
-                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" name="password2">
-                <span class="error"><?php echo $passErr2 ?></span>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" name="admin">
-                <label class="form-check-label">
-                    admin
-                </label>
-            </div>
-            <button type="submit" name="register" class="btn btn-primary mt-2">Daftar</button>
+
+            <input type="submit" name="register" class="btn btn-primary mt-2" value="Register">
         </form>
-        <a href="login.php">Login</a>
+
+        <div class="login-link">
+            <p>if you have account </p><a href="login.php">Login</a>
+        </div>
+
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 

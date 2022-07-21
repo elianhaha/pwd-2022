@@ -5,7 +5,8 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 require "user.php";
-$user = mysqli_query($connect, "SELECT * FROM users");
+$username = $_SESSION['username'];
+$user = query("SELECT * FROM users");
 
 ?>
 <!DOCTYPE html>
@@ -15,19 +16,24 @@ $user = mysqli_query($connect, "SELECT * FROM users");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        a .history {
+            text-decoration: none;
+        }
+    </style>
     <title>Daftar User</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
     <?php include('navbar.php') ?>
 
-    <div class="container">
-        <h1>Admin </h1>
-        <a href="tambahkereta.php" class="btn btn-primary">Tambah User</a>
-        <form action="" method="GET">
-            <input type="text" name="keyword" placeholder="Search....">
-            <input type="submit" value="cari">
-        </form>
+    <h1>Admin <?php echo ucfirst($username) ?> </h1>
+    <form action="" method="POST">
+        <input type="text" name="keyword" placeholder="Search...." id="keyword">
+
+    </form>
+    <div class="container" id="container">
         <table class="table table-hover table-striped table-bordered mt-3">
 
             <tr>
@@ -39,21 +45,24 @@ $user = mysqli_query($connect, "SELECT * FROM users");
             </tr>
             <?php
             $i = 1;
-            while ($row = mysqli_fetch_assoc($user)) : ?>
+            foreach ($user as $u) : ?>
                 <tr>
                     <td scope="row"><?= $i++; ?></td>
-                    <td><?= $row['username']; ?></td>
-                    <td><?= $row['email']; ?></td>
-                    <td><?= $row['usertype']; ?></td>
+                    <td><?= $u['username']; ?></td>
+                    <td><?= $u['email']; ?></td>
+                    <td><?= $u['usertype']; ?></td>
                     <td>
 
-                        <a class="btn badge bg-danger" href="delete.php?id=<?= $row['id'] ?>">Delete</a>
+                        <a class="btn badge bg-danger" href="delete-user.php?id=<?= $u['id'] ?> " onclick="return confirm('Anda yakin mau menghapus')">Delete</a>
+
 
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach ?>
         </table>
+        <a class="history" href="history-pemesanan.php">history pemesanan tiket</a>
     </div>
+    <script src="daftar-user.js"></script>
 </body>
 
 </html>
